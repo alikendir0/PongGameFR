@@ -1,9 +1,9 @@
 import java.util.*;
 import java.awt.*;
 public class Ball extends Rectangle{
-    Random random;
-    int xVelocity;
-    int yVelocity;
+    private Random random;
+    public int xVelocity;
+    public int yVelocity;
     Ball(int x,int y,int width,int height){
         super(x,y,width,height);
         random=new Random();
