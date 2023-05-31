@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.*;
 import java.awt.event.*;
 public class Paddle extends Rectangle{

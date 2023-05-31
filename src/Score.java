@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.*;
 public class Score {
     static int GAME_WIDTH;

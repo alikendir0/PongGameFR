@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.util.*;
 import java.awt.*;
 public class Ball extends Rectangle{

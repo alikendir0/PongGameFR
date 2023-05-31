@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 
 public class GameFrame extends JFrame {
     GamePanel panel;
