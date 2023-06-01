@@ -31,7 +31,7 @@ public class Ball extends Rectangle{
         setYDirection(randomYDirection*speed);
     }
     public void draw(Graphics g){
-        g.setColor(Color.GREEN);
-        g.fillOval(x,y,height,width);
+        g.setColor(Color.RED);
+        g.fillOval(x,y,width,height);
     }
 }

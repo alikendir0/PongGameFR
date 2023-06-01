@@ -19,9 +19,11 @@ public class GamePanel extends JPanel implements Runnable{
     Random random;
     Score score;
     Menu menu;
+    Controls controls;
     private boolean showScoreMessage = false;
+    private boolean beginning=true;
     private enum STATE{
-        MENU,GAME
+        MENU,GAME,CONTROLS
     }
     private STATE State=STATE.MENU;
     GamePanel(){
@@ -55,6 +57,9 @@ public class GamePanel extends JPanel implements Runnable{
         } else if(State==STATE.MENU){
             menu=new Menu();
             menu.paint(g);
+        } else if (State==STATE.CONTROLS) {
+            controls =new Controls();
+            controls.paint(g);
         }
     }
     public void draw(Graphics g){
@@ -129,6 +134,7 @@ public class GamePanel extends JPanel implements Runnable{
                     throw new RuntimeException(e);
                 }
                 showScoreMessage = false;
+                beginning=true;
                 break;
             case 2:
                 score.player2++;
@@ -141,6 +147,7 @@ public class GamePanel extends JPanel implements Runnable{
                     throw new RuntimeException(e);
                 }
                 showScoreMessage = false;
+                beginning=true;
                 break;
         }
     }
@@ -150,6 +157,7 @@ public class GamePanel extends JPanel implements Runnable{
         newPaddles();
         newBall();
         ball.setSpeed(0);
+        beginning=true;
     }
     public void run(){
         long lastTime = System.nanoTime();
@@ -173,11 +181,18 @@ public class GamePanel extends JPanel implements Runnable{
             if(State==STATE.GAME){
                 paddle1.keyPressed(e);
                 paddle2.keyPressed(e);
-                if((State==STATE.GAME&&KeyEvent.VK_ENTER==e.getKeyCode())&&ball.x==(GAME_WIDTH/2-BALL_DIAMETER/2))
+                if((State==STATE.GAME&&KeyEvent.VK_ENTER==e.getKeyCode())&&beginning){
                     ball.setSpeed(4);
+                    beginning=false;
+                }
                 if(State==STATE.GAME&&KeyEvent.VK_R==e.getKeyCode())
                     resetGameState();
             }if(State==STATE.MENU){
+                if(KeyEvent.VK_ENTER==e.getKeyCode()){
+                    State=STATE.GAME;
+                }else if (KeyEvent.VK_P==e.getKeyCode())
+                    State=STATE.CONTROLS;
+            }if(State==STATE.CONTROLS){
                 if(KeyEvent.VK_ENTER==e.getKeyCode()){
                     State=STATE.GAME;
                 }
