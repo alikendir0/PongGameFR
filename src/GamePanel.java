@@ -82,14 +82,14 @@ public class GamePanel extends JPanel implements Runnable{
             paddle2.y=0;
         if(paddle2.y>=GAME_HEIGHT-PADDLE_HEIGHT)
             paddle2.y=GAME_HEIGHT-PADDLE_HEIGHT;
-
+        //to make the paddles not go out of bounds
         if(ball.y<=0){
             ball.setYDirection(-ball.yVelocity);
         }
         if(ball.y>=GAME_HEIGHT-BALL_DIAMETER){
             ball.setYDirection(-ball.yVelocity);
         }
-
+        //to reflect the ball from the walls
         if(ball.intersects(paddle1)){
             ball.xVelocity = Math.abs(ball.xVelocity);
             ball.xVelocity++;
@@ -110,6 +110,7 @@ public class GamePanel extends JPanel implements Runnable{
             ball.setXDirection(-ball.xVelocity);
             ball.setYDirection(ball.yVelocity);
         }
+        //to make the ball bounce from paddles+increases ball speed for the fun of it
         if(ball.x<=0){
             playerScored(2);
             newBall();
@@ -125,14 +126,17 @@ public class GamePanel extends JPanel implements Runnable{
         switch(id) {
             case 1:
                 score.player1++;
+
                 player=1;
                 showScoreMessage = true;
+                //this displays when a player scores a message
                 repaint();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                //pauses the game for a brief moment
                 showScoreMessage = false;
                 beginning=true;
                 break;
@@ -192,7 +196,8 @@ public class GamePanel extends JPanel implements Runnable{
                     State=STATE.GAME;
                 }else if (KeyEvent.VK_P==e.getKeyCode())
                     State=STATE.CONTROLS;
-            }if(State==STATE.CONTROLS){
+            }
+            if(State==STATE.CONTROLS){
                 if(KeyEvent.VK_ENTER==e.getKeyCode()){
                     State=STATE.GAME;
                 }
